@@ -1,4 +1,4 @@
-package com.example.shopo.shopo;
+package com.example.shopo;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
