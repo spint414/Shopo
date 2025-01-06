@@ -1,6 +1,7 @@
 module com.example.shopo.shopo {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.shopo to javafx.fxml;

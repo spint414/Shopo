@@ -1,28 +1,99 @@
-@import "bootstrap3.css";
-
-.menuButton{
-    -fx-border-width: 0px 0px 0px 5px;
-    -fx-border-radius: 0px;
-    -fx-background-radius: 0px;
-    -fx-text-fill: #4E4F52;
-    -fx-background-color: #e5e5e5;
-    -fx-min-height: 90;
+.header {
+    -fx-background-color: linear-gradient(to bottom right, #098c53, #246861);
+    -fx-alignment: center;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0 0 1px 0;
 }
 
-.menuButton:hover{
-    -fx-background-color: #f3f3f3;
-    /*-fx-text-fill: white;*/
+.header Label {
+    -fx-text-fill: #ffffff;
 }
 
-#dashHead{
-    -fx-background-color: #e5e5e5;
+.nav-form {
+    -fx-background-color: linear-gradient(to bottom right, #0f6789, #286155);
 }
-#acDashBord{
-    -fx-background-color:#e5e5e5;
+
+.nav-form Label {
+    -fx-text-fill: #ffffff;
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0.5;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+}
+
+.nav-btn:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+}
+
+.log-out {
+    -fx-background-color: #106abf;
+    -fx-padding: 5px;
+    -fx-cursor: hand;
+    -fx-background-radius: 50px;
+}
+
+.log-out:hover {
+    -fx-background-color: #a71931;
+    -fx-cursor: hand;
+}
+
+.log-out FontAwesomeIconView {
+    -fx-fill: #ffffff;
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 5, 0, 0, 0);
+}
+
+.white-background {
+    -fx-background-color: #ffffff;
+}
+
+.radius {
+    -fx-background-radius: 8px;
+}
+
+.transparent {
+    -fx-background-color: transparent;
 }
 
 .table-view {
-    -fx-focus-color: #cecece;
-    -fx-effect: null;
-    -fx-outer-border : #cecece;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-background-radius: 5px;
+    -fx-border-width: 1.5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 5px 5px 0 0;
+}
+
+.table-view .column-header, .filter {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;
+}
+
+.btn {
+    -fx-background-color: linear-gradient(to bottom right, #098c53, #246861);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+}
+
+.btn:hover {
+    -fx-background-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-cursor: hand;
+
 }
