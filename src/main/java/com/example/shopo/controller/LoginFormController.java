@@ -4,15 +4,15 @@ package com.example.shopo.controller;
 import com.example.shopo.bo.custom.CashierBO;
 import com.example.shopo.bo.custom.Impl.LoginBOImpl;
 import com.example.shopo.bo.custom.LoginBO;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
 import com.example.shopo.dto.CashierDTO;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,9 +20,12 @@ import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 public class LoginFormController {
-    public JFXTextField txtUserName;
-    public JFXPasswordField txtPassword;
-    public AnchorPane root;
+    @FXML
+    public TextField txtUserName;
+    @FXML
+    private PasswordField txtPassword;  // Add @FXML here
+    @FXML
+    private AnchorPane root;
     CashierBO cashierBO;
 
 
@@ -34,14 +37,14 @@ public class LoginFormController {
 
 
         } else {
-            txtUserName.setFocusColor(Paint.valueOf("red"));
+//            txtUserName.setFocusColor(Paint.valueOf("red"));
             txtUserName.requestFocus();
 
 
         }
         if (Pattern.compile("^(2259)$").matcher(userName).matches()) {
         } else {
-            txtPassword.setFocusColor(Paint.valueOf("red"));
+//            txtPassword.setFocusColor(Paint.valueOf("red"));
             txtPassword.requestFocus();
 
         }

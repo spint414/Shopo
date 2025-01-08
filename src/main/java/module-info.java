@@ -8,4 +8,5 @@ module Shopo {
     requires jasperreports;
     exports com.example.shopo;
     exports com.example.shopo.controller to javafx.fxml;
+    opens com.example.shopo.controller to javafx.fxml;
 }

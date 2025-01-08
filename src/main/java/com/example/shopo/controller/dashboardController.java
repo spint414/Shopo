@@ -1,6 +1,7 @@
 package com.example.shopo.controller;
 
 
+import com.example.shopo.ShopoApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,8 +18,7 @@ public class dashboardController implements Initializable {
 
     private void setUi(String location) throws IOException {
         context.getChildren().clear();
-        context.getChildren().add(FXMLLoader.load(this.getClass().
-                getResource("/view/" + location + ".fxml")));
+        context.getChildren().add(FXMLLoader.load(ShopoApplication.class.getResource("/view/" + location + ".fxml")));
     }
 
     public void DashBoardOnAction() throws IOException {

@@ -20,7 +20,7 @@ public class ShopoApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(ShopoApplication.class.getResource("view/LoginForm.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(ShopoApplication.class.getResource("view/DashboardForm.fxml")));
             Scene scene = new Scene(root);
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setScene(scene);
