@@ -32,7 +32,7 @@ public class DashboardFormController implements Initializable {
         ResultSet set = DBConnection.getInstance().
                 getConnection().
                 prepareStatement
-                        ("SELECT COUNT(custID) FROM Customer")
+                        ("SELECT COUNT(customer_id) FROM customers")
                 .executeQuery();
         if (set.next()) {
             int customerCount = set.getInt(1);
@@ -44,7 +44,7 @@ public class DashboardFormController implements Initializable {
         ResultSet set = DBConnection.getInstance().
                 getConnection().
                 prepareStatement
-                        ("SELECT COUNT(orderID) FROM orders")
+                        ("SELECT COUNT(order_id) FROM orders")
                 .executeQuery();
         if (set.next()) {
             int customerCount = set.getInt(1);
@@ -56,9 +56,9 @@ public class DashboardFormController implements Initializable {
                 getConnection().
                 prepareStatement
                         ("SELECT \n" +
-                                "    SUM(amount) SalesQuantity\n" +
+                                "    SUM(total_amount)\n" +
                                 "FROM\n" +
-                                "    payment")
+                                "    orders")
                 .executeQuery();
         if (set.next()) {
             int customerCount = set.getInt(1);
@@ -70,9 +70,9 @@ public class DashboardFormController implements Initializable {
                 getConnection().
                 prepareStatement
                         ("SELECT \n" +
-                                "    SUM(orderQTY) SalesQuantity\n" +
+                                "    SUM(quantity)\n" +
                                 "FROM\n" +
-                                "    Orderdetail")
+                                "    order_details")
                 .executeQuery();
         if (set.next()) {
             int customerCount = set.getInt(1);

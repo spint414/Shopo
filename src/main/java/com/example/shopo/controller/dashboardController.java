@@ -17,6 +17,7 @@ public class dashboardController implements Initializable {
 
 
     private void setUi(String location) throws IOException {
+        location = "DashboardForm";
         context.getChildren().clear();
         context.getChildren().add(FXMLLoader.load(ShopoApplication.class.getResource("/view/" + location + ".fxml")));
     }
