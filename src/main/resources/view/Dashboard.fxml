@@ -14,7 +14,7 @@
       <Pane prefHeight="81.0" prefWidth="30.0" style="-fx-background-color: linear-gradient(to right top, #6c5ce7, #8554ed, #9f48f1, #b935f2, #d300f0);" />
       <Pane layoutY="849.0" prefHeight="89.0" prefWidth="30.0" style="-fx-background-color: linear-gradient(to right top, #6c5ce7, #8554ed, #9f48f1, #b935f2, #d300f0);" />
       <Pane fx:id="context" layoutX="197.0" layoutY="25.0" prefHeight="908.0" prefWidth="1226.0" />
-      <VBox alignment="TOP_CENTER" prefHeight="938.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to right top, #6c5ce7, #8554ed, #9f48f1, #b935f2, #d300f0); -fx-background-radius: 30;">
+      <VBox alignment="TOP_CENTER" prefHeight="938.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to right top, #6c5ce7, #8554ed, #9f48f1, #b935f2, #d300f0);">
          <children>
             <ImageView fitHeight="147.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
                <image>
