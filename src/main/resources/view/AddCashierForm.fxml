@@ -26,7 +26,7 @@
         <Label layoutX="29.0" layoutY="170.0" text="Password" />
         <TextField fx:id="txtPassword" layoutX="29.0" layoutY="190.0" prefHeight="31.0" prefWidth="230.0" promptText="Password" />
         <Label layoutX="29.0" layoutY="240.0" text="Role" />
-        <TextField fx:id="txtRole" layoutX="29.0" layoutY="250.0" prefHeight="31.0" prefWidth="230.0" promptText="Role" />
+        <TextField fx:id="txtRole" layoutX="29.0" layoutY="260.0" prefHeight="31.0" prefWidth="230.0" promptText="Role" />
 
 
         <Pane layoutX="734.0" layoutY="100.0">
