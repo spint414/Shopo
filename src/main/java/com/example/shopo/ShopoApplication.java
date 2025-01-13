@@ -23,7 +23,6 @@ public class ShopoApplication extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginForm.fxml"));
             root = loader.load();
             Scene scene = new Scene(root);
-            primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setScene(scene);
             primaryStage.show();
             root.setOnMousePressed(event -> {

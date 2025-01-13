@@ -59,14 +59,6 @@ public class CashierFormController implements Initializable {
 
 
     public void btnLogOutOnAction(ActionEvent actionEvent) throws IOException {
-//        Stage stage = (Stage) context.getScene().getWindow();
-//        stage.close();
-//
-//        Stage dashBoardScene = new Stage();
-//        dashBoardScene.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("../view/LoginForm.fxml"))));
-//
-//        dashBoardScene.show();
-//    }
         Stage stage = (Stage) context.getScene().getWindow();
         stage.close();
     }

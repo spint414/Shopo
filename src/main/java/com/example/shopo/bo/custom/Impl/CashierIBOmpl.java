@@ -12,33 +12,34 @@ import java.sql.SQLException;
 
 public class CashierIBOmpl implements CashierBO {
     CashierDAO cashierDAO = (CashierDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTypes.CASHIER);
+
     @Override
     public boolean addCashier(CashierDTO cashier) throws ClassNotFoundException, SQLException {
-        return cashierDAO.add(new Cashier(cashier.getCastID(),cashier.getCastName(),cashier.getCastBirthDay(),cashier.getCastAddress(), cashier.getCastPhoto(),cashier.getCastlogin(),cashier.getCastPassword()));
+        return cashierDAO.add(new Cashier(cashier.getCastUser(), cashier.getCastPassword(), cashier.getCastRole()));
     }
 
     @Override
-    public boolean deleteCashier(String id) throws ClassNotFoundException, SQLException {
-        return cashierDAO.delete(id);
+    public boolean deleteCashier(String user) throws ClassNotFoundException, SQLException {
+        return cashierDAO.delete(user);
     }
 
     @Override
     public boolean updateCashier(CashierDTO cashier) throws ClassNotFoundException, SQLException {
-        return cashierDAO.update(new Cashier(cashier.getCastID(),cashier.getCastName(),cashier.getCastBirthDay(),cashier.getCastAddress(), cashier.getCastPhoto(),cashier.getCastlogin(),cashier.getCastPassword()));
+        return cashierDAO.update(new Cashier(cashier.getCastUser(), cashier.getCastPassword(), cashier.getCastRole()));
     }
 
     @Override
-    public CashierDTO searchCashier(String id) throws ClassNotFoundException, SQLException {
-        Cashier search = cashierDAO.search(id);
-        return new CashierDTO(search.getCastID(),search.getCastName(),search.getCastBirthDay(),search.getCastAddress(),search.getCastPhoto(),search.getCastlogin(),search.getCastPassword());
+    public CashierDTO searchCashier(String user) throws ClassNotFoundException, SQLException {
+        Cashier search = cashierDAO.search(user);
+        return new CashierDTO(search.getCastUser(), search.getCastPassword(), search.getCastRole());
     }
 
     @Override
     public ObservableList<CashierDTO> getAllCashier() throws ClassNotFoundException, SQLException {
-        ObservableList<Cashier> all =cashierDAO.getAll();
+        ObservableList<Cashier> all = cashierDAO.getAll();
         ObservableList<CashierDTO> allCashier = FXCollections.observableArrayList();
-        for (Cashier ID : all) {
-            CashierDTO dto = new CashierDTO(ID.getCastID(),ID.getCastName(),ID.getCastBirthDay(),ID.getCastAddress(),ID.getCastPhoto(),ID.getCastlogin(),ID.getCastPassword());
+        for (Cashier cashier : all) {
+            CashierDTO dto = new CashierDTO(cashier.getCastUser(), cashier.getCastPassword(), cashier.getCastRole());
             allCashier.add(dto);
         }
         return allCashier;
@@ -48,6 +49,4 @@ public class CashierIBOmpl implements CashierBO {
     public int getRowCount() throws ClassNotFoundException, SQLException {
         return cashierDAO.getRowCount();
     }
-
-
 }

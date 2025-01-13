@@ -16,6 +16,6 @@ public class LoginBOImpl implements LoginBO {
 //        Cashier validate = usersDAO.validate(userName);
 //        return new UsersDTO(validate.getUser_name(),validate.getUser_password(),validate.getPosition());
         Cashier cus = cashierDAO.validate(userName);
-        return new CashierDTO(cus.getCastID(),cus.getCastlogin(),cus.getCastPassword());
+        return new CashierDTO(cus.getCastUser(),cus.getCastRole(),cus.getCastPassword());
     }
 }
