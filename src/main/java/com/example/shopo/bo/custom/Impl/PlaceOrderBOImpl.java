@@ -37,7 +37,7 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
         ObservableList<Cashier> all = cashierDAO.getAll();
         ObservableList<CashierDTO> allCashier = FXCollections.observableArrayList();
         for (Cashier ID : all) {
-            CashierDTO dto = new CashierDTO(ID.getCastID(), ID.getCastName(), ID.getCastBirthDay(), ID.getCastAddress(), ID.getCastPhoto(), ID.getCastlogin(), ID.getCastPassword());
+            CashierDTO dto = new CashierDTO(ID.getCastUser(), ID.getCastPassword(), ID.getCastRole());
             allCashier.add(dto);
         }
         return allCashier;
@@ -57,7 +57,7 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
     @Override
     public CashierDTO searchCashier(String id) throws Exception {
         Cashier search = cashierDAO.search(id);
-        return new CashierDTO(search.getCastID(), search.getCastName(), search.getCastBirthDay(), search.getCastAddress(), search.getCastPhoto(), search.getCastlogin(), search.getCastPassword());
+        return new CashierDTO(search.getCastUser(), search.getCastPassword(), search.getCastRole());
     }
 
     @Override

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<AnchorPane prefHeight="908.0" prefWidth="1226.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shopo.controller.AddCashierFormController">
+    <children>
+        <TableView fx:id="tblCashier" layoutX="14.0" layoutY="350.0" onMousePressed="#tblCashierClick" prefHeight="500.0" prefWidth="1201.0" stylesheets="@../css/fullpackstyling.css">
+            <columns>
+                <TableColumn fx:id="colCashUser" prefWidth="192.0" text="User" />
+                <TableColumn fx:id="colCashPassword" prefWidth="321.0" text="Password" />
+                <TableColumn fx:id="colCashRole" prefWidth="385.0" text="Role" />
+            </columns>
+        </TableView>
+
+        <Label layoutX="29.0" layoutY="100.0" text="Username" />
+        <TextField fx:id="txtUser" layoutX="29.0" layoutY="120.0" prefHeight="31.0" prefWidth="230.0" promptText="Username" />
+        <Label layoutX="29.0" layoutY="170.0" text="Password" />
+        <TextField fx:id="txtPassword" layoutX="29.0" layoutY="190.0" prefHeight="31.0" prefWidth="230.0" promptText="Password" />
+        <Label layoutX="29.0" layoutY="240.0" text="Role" />
+        <TextField fx:id="txtRole" layoutX="29.0" layoutY="260.0" prefHeight="31.0" prefWidth="230.0" promptText="Role" />
+
+
+        <Pane layoutX="734.0" layoutY="100.0">
+            <Button layoutX="0.0" layoutY="0.0" onAction="#addOnAction" prefHeight="57.0" prefWidth="193.0" style="-fx-background-color: #4b7bec;" text="Add" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="21.0" />
+                </font>
+            </Button>
+            <Button layoutX="0.0" layoutY="70.0" onAction="#searchOnAction" prefHeight="57.0" prefWidth="193.0" style="-fx-background-color: #fa8231;" text="Search" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="19.0" />
+                </font>
+            </Button>
+            <Button layoutX="200.0" layoutY="0.0" onAction="#cashierUpdateOnAction" prefHeight="57.0" prefWidth="193.0" style="-fx-background-color: #0fb9b1;" text="Update" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="21.0" />
+                </font>
+            </Button>
+            <Button layoutX="200.0" layoutY="70.0" onAction="#cashierDeleteOnAction" prefHeight="57.0" prefWidth="193.0" style="-fx-background-color: #485460;" text="Delete" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="23.0" />
+                </font>
+            </Button>
+        </Pane>
+        <Pane prefHeight="78.0" prefWidth="1226.0" style="-fx-background-color: linear-gradient(to right top, #6c5ce7, #8554ed, #9f48f1, #b935f2, #d300f0);" />
+    </children>
+</AnchorPane>
+

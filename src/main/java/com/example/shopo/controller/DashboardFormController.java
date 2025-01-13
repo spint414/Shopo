@@ -3,6 +3,7 @@ package com.example.shopo.controller;
 
 import com.example.shopo.db.DBConnection;
 import com.example.shopo.dto.PaymentDTO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +33,7 @@ public class DashboardFormController implements Initializable {
         ResultSet set = DBConnection.getInstance().
                 getConnection().
                 prepareStatement
-                        ("SELECT COUNT(custID) FROM Customer")
+                        ("SELECT COUNT(customer_id) FROM customers")
                 .executeQuery();
         if (set.next()) {
             int customerCount = set.getInt(1);
@@ -44,7 +45,7 @@ public class DashboardFormController implements Initializable {
         ResultSet set = DBConnection.getInstance().
                 getConnection().
                 prepareStatement
-                        ("SELECT COUNT(orderID) FROM orders")
+                        ("SELECT COUNT(order_id) FROM orders")
                 .executeQuery();
         if (set.next()) {
             int customerCount = set.getInt(1);
@@ -56,9 +57,9 @@ public class DashboardFormController implements Initializable {
                 getConnection().
                 prepareStatement
                         ("SELECT \n" +
-                                "    SUM(amount) SalesQuantity\n" +
+                                "    SUM(total_amount)\n" +
                                 "FROM\n" +
-                                "    payment")
+                                "    orders")
                 .executeQuery();
         if (set.next()) {
             int customerCount = set.getInt(1);
@@ -70,9 +71,9 @@ public class DashboardFormController implements Initializable {
                 getConnection().
                 prepareStatement
                         ("SELECT \n" +
-                                "    SUM(orderQTY) SalesQuantity\n" +
+                                "    SUM(quantity)\n" +
                                 "FROM\n" +
-                                "    Orderdetail")
+                                "    order_details")
                 .executeQuery();
         if (set.next()) {
             int customerCount = set.getInt(1);
@@ -81,32 +82,41 @@ public class DashboardFormController implements Initializable {
     }
 
     public void loadPieChart() throws SQLException, ClassNotFoundException {
-        ObservableList<PieChart.Data> pieChartData = observableArrayList(
-                new PieChart.Data("January", 13),
-                new PieChart.Data("February", 25),
-                new PieChart.Data("March", 10),
-                new PieChart.Data("April", 43),
-                new PieChart.Data("April", 25),
-                new PieChart.Data("May", 22),
-                new PieChart.Data("June", 12),
-                new PieChart.Data("July", 82),
-                new PieChart.Data("August", 22),
-                new PieChart.Data("September", 32),
-                new PieChart.Data("October", 24),
-                new PieChart.Data("November", 22),
-                new PieChart.Data("December", 22));
+        String query = "SELECT EXTRACT(MONTH FROM order_date) AS month, COUNT(order_id) AS order_count " +
+                "FROM orders " +
+                "GROUP BY EXTRACT(MONTH FROM order_date) " +
+                "ORDER BY EXTRACT(MONTH FROM order_date)";
+
+        ResultSet resultSet = DBConnection.getInstance().getConnection().prepareStatement(query).executeQuery();
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        while (resultSet.next()) {
+            int month = resultSet.getInt("month");
+            int orderCount = resultSet.getInt("order_count");
+            String monthName = getMonthName(month); // Helper method to get the month name
+            pieChartData.add(new PieChart.Data(monthName, orderCount));
+        }
+
         PieChart.setData(pieChartData);
+    }
 
-        XYChart.Series series =new XYChart.Series();
-        series.getData().add(new XYChart.Data("1",23));
-        series.getData().add(new XYChart.Data("2",65));
-        series.getData().add(new XYChart.Data("3",68));
-        series.getData().add(new XYChart.Data("4",32));
-        series.getData().add(new XYChart.Data("5",56));
-        series.getData().add(new XYChart.Data("6",76));
-        series.getData().add(new XYChart.Data("7",44));
-        areaChart.getData().add(series);
-
+    private String getMonthName(int month) {
+        switch (month) {
+            case 1: return "January";
+            case 2: return "February";
+            case 3: return "March";
+            case 4: return "April";
+            case 5: return "May";
+            case 6: return "June";
+            case 7: return "July";
+            case 8: return "August";
+            case 9: return "September";
+            case 10: return "October";
+            case 11: return "November";
+            case 12: return "December";
+            default: return "Unknown";
+        }
     }
 
     @Override

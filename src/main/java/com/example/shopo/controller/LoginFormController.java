@@ -4,109 +4,106 @@ package com.example.shopo.controller;
 import com.example.shopo.bo.custom.CashierBO;
 import com.example.shopo.bo.custom.Impl.LoginBOImpl;
 import com.example.shopo.bo.custom.LoginBO;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.example.shopo.db.DBConnection;
 import com.example.shopo.dto.CashierDTO;
+import com.example.shopo.util.SceneUtils;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 public class LoginFormController {
-    public JFXTextField txtUserName;
-    public JFXPasswordField txtPassword;
-    public AnchorPane root;
-    CashierBO cashierBO;
+    @FXML
+    public TextField txtUserName;
+    @FXML
+    private PasswordField txtPassword;
+    @FXML
+    private AnchorPane root;
+    @FXML
+    private Button btnSignIn;
+    @FXML
+    private Button btnClose;
+    @FXML
+    private Label lblErrorMessage;
 
-
-    public void LoginOnAction() throws IOException {
+    public void loginOnAction(ActionEvent actionEvent) {
 
         String userName = txtUserName.getText().trim();
         String password = txtPassword.getText().trim();
-        if (Pattern.compile("^(thilina)$").matcher(userName).matches()) {
 
+        if (!userName.isEmpty() && !password.isEmpty()) {
+            try {
+                // Connect to the database
+                Connection connection = DBConnection.getInstance().getConnection();
 
-        } else {
-            txtUserName.setFocusColor(Paint.valueOf("red"));
-            txtUserName.requestFocus();
+                // SQL query to validate username, password, and role
+                String query = "SELECT role FROM users WHERE username = ? AND password = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, userName);
+                preparedStatement.setString(2, password);
 
+                ResultSet resultSet = preparedStatement.executeQuery();
 
-        }
-        if (Pattern.compile("^(2259)$").matcher(userName).matches()) {
-        } else {
-            txtPassword.setFocusColor(Paint.valueOf("red"));
-            txtPassword.requestFocus();
+                if (resultSet.next()) {
+                    // If a match is found, check the role
+                    String role = resultSet.getString("role");
+                    Stage window = (Stage) this.root.getScene().getWindow();
 
-        }
-        if (userName.length() > 0 && password.length() > 0) {
-            if (userName.equalsIgnoreCase("thilina")
-                    && password.equals("2259")) {
-
-                Stage window = (Stage) this.root.getScene().getWindow();
-                window.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/Dashboard.fxml"))));
-                window.centerOnScreen();
-
-            } else {
-                LoginBO loginBO = new LoginBOImpl();
-                try {
-                    CashierDTO cashierDTO = loginBO.getValidated(txtUserName.getText());
-                    System.out.println(cashierDTO.getCastID()+" id from login form");
-                    System.out.println(cashierDTO.getCastlogin() + " userName");
-                    System.out.println(cashierDTO.getCastPassword() + " password");
-
-                    if (cashierDTO.getCastlogin().equals(txtUserName.getText()) &&
-                            cashierDTO.getCastPassword().equals(txtPassword.getText())) {
-
-                        Stage window = (Stage) this.root.getScene().getWindow();
-//                        window.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/CashierForm.fxml"))));
-                        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("../view/CashierForm.fxml"));
-                        Parent parent =  fxmlLoader.load();
-                        CashierFormController controller = fxmlLoader.getController();
-                        System.out.println("sending data");
-                        controller.setCashierID(cashierDTO.getCastID());
-                        window.setScene(new Scene(parent));
-                        window.centerOnScreen();
-                        window.show();
-
+                    if ("admin".equalsIgnoreCase(role)) {
+                        // Navigate to Dashboard for admin
+                        SceneUtils.loadScene(window, "/view/Dashboard.fxml");
                     } else {
-                        System.out.println("waradi ukanno");
+                        // Navigate to CashierForm for non-admin
+                        SceneUtils.loadScene(window, "/view/CashierForm.fxml");
                     }
-                } catch (NullPointerException e) {
-                    System.out.println("user name waradi ballo");
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                } else {
+                    // Username or password is incorrect
+                    lblErrorMessage.setText("Invalid username or password");
+                    lblErrorMessage.setVisible(true);
+                    txtUserName.requestFocus();
                 }
-//                txtUserName.setFocusColor(Paint.valueOf("red"));
-//                txtUserName.requestFocus();
-//                String tilte = "Sign In";
-//                String message = "Error Username " + "'" + txtUserName.getText() + "'" + ", and Password " + "'" + txtPassword.getText() + "'" + " Wrong";
-//                tray.notification.TrayNotification tray = new TrayNotification();
-//                AnimationType type = AnimationType.POPUP;
-//
-//                tray.setAnimationType(type);
-//                tray.setTitle(tilte);
-//                tray.setMessage(message);
-//                tray.setNotificationType(NotificationType.ERROR);
-//                tray.showAndDismiss(Duration.millis(3000));
+
+                // Close the ResultSet and PreparedStatement
+                resultSet.close();
+                preparedStatement.close();
+
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("Database connection error: " + e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         } else {
-            String tilte = "Sign In";
-            String message = "Empty Username Or Password";
+            // Handle empty username or password, show the error message
+            lblErrorMessage.setText("Username or Password cannot be empty");
+            lblErrorMessage.setVisible(true);
         }
     }
 
+    public void closeOnAction(ActionEvent actionEvent) {
+        // Show a confirmation dialog before closing
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Exit");
+        alert.setHeaderText("Are you sure you want to exit?");
+        alert.setContentText("Click OK to exit or Cancel to stay.");
 
-    public void btnCloaseOnAction(ActionEvent actionEvent) {
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.close();
+        // Wait for user response
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                Stage stage = (Stage) root.getScene().getWindow();
+                stage.close();
+            }
+        });
     }
 }

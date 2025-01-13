@@ -20,9 +20,9 @@ public class ShopoApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(ShopoApplication.class.getResource("view/LoginForm.fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginForm.fxml"));
+            root = loader.load();
             Scene scene = new Scene(root);
-            primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setScene(scene);
             primaryStage.show();
             root.setOnMousePressed(event -> {

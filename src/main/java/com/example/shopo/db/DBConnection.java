@@ -14,21 +14,17 @@ public class DBConnection {
 
     private DBConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tileshop", "root", "1234");
-
+        this.connection = DriverManager.getConnection("jdbc:mysql://103.97.126.29:3306/isrpfpwk_ShopM", "isrpfpwk_ShopM", "project2");
     }
 
     public static DBConnection getInstance() throws SQLException, ClassNotFoundException {
         if (dbConnection == null) {
             dbConnection = new DBConnection();
-
-
-
         }
         return dbConnection;
     }
-    public Connection getConnection(){
 
+    public Connection getConnection() {
         return this.connection;
     }
 }
