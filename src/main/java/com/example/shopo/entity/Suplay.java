@@ -5,14 +5,14 @@ public class Suplay {
     private String suplayerName;
     private String suplayerAddress;
     private String suplayerPhone;
-    private String suplayerEmail;
+    private String suplayerContact;
 
-    public Suplay(String suplayerID, String suplayerName, String suplayerAddress, String suplayerPhone, String suplayerEmail) {
+    public Suplay(String suplayerID, String suplayerName, String suplayerAddress, String suplayerPhone, String suplayerContact) {
         this.suplayerID = suplayerID;
         this.suplayerName = suplayerName;
         this.suplayerAddress = suplayerAddress;
         this.suplayerPhone = suplayerPhone;
-        this.suplayerEmail = suplayerEmail;
+        this.suplayerContact = suplayerContact;
     }
 
     public String getSuplayerID() {
@@ -47,11 +47,11 @@ public class Suplay {
         this.suplayerPhone = suplayerPhone;
     }
 
-    public String getSuplayerEmail() {
-        return suplayerEmail;
+    public String getSuplayerContact() {
+        return suplayerContact;
     }
 
-    public void setSuplayerEmail(String suplayerEmail) {
-        this.suplayerEmail = suplayerEmail;
+    public void setSuplayerContact(String suplayerContact) {
+        this.suplayerContact = suplayerContact;
     }
 }

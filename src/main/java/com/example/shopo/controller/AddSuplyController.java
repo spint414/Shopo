@@ -2,36 +2,30 @@ package com.example.shopo.controller;
 
 import com.example.shopo.bo.BOFactory;
 import com.example.shopo.bo.custom.SuplayBO;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import com.example.shopo.dto.SuplayDTO;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AddSuplyController implements Initializable {
-    public JFXTextField txtSupId;
-    public JFXTextField txtAddress;
-    public JFXTextField txtEmail;
-    public JFXTextField txtCompanyName;
-    public JFXTextField txtPhoneNo;
-    public JFXButton btnSave;
+    public TextField txtSupId;
+    public TextField txtAddress;
+    public TextField txtContact;
+    public TextField txtCompanyName;
+    public TextField txtPhoneNo;
+    public Button btnSave;
     public TableView<SuplayDTO> tblSup;
     public TableColumn<Object, Object> colSupId;
     public TableColumn<Object, Object> colComName;
     public TableColumn<Object, Object> colAddress;
     public TableColumn<Object, Object> colPhoneNo;
-    public TableColumn<Object, Object> colEmail;
+    public TableColumn<Object, Object> colContact;
     SuplayBO suplayBO;
 
 
@@ -42,7 +36,7 @@ public class AddSuplyController implements Initializable {
         colComName.setCellValueFactory(new PropertyValueFactory<>("suplayerName"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("suplayerAddress"));
         colPhoneNo.setCellValueFactory(new PropertyValueFactory<>("suplayerPhone"));
-        colEmail.setCellValueFactory(new PropertyValueFactory<>("suplayerEmail"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("suplayerContact"));
         setTxtcustID();
         loadAllSuplay();
     }
@@ -76,7 +70,7 @@ public class AddSuplyController implements Initializable {
             boolean isAdded = suplayBO.addSuplay(new SuplayDTO(
                     txtSupId.getText(),
                     txtAddress.getText(),
-                    txtEmail.getText(),
+                    txtContact.getText(),
                     txtCompanyName.getText(),
                     txtPhoneNo.getText()));
             String tilte;
@@ -110,7 +104,7 @@ public class AddSuplyController implements Initializable {
                 txtCompanyName.setText(searchSaplay.getSuplayerName());
                 txtAddress.setText(searchSaplay.getSuplayerAddress());
                 txtPhoneNo.setText(searchSaplay.getSuplayerPhone());
-                txtEmail.setText(searchSaplay.getSuplayerEmail());
+                txtContact.setText(searchSaplay.getSuplayerContact());
 
                 String tilte = "Suplayer Searched ";
                 String message = "Suplayer Is " + "" + txtCompanyName.getText() + "";
@@ -132,8 +126,8 @@ public class AddSuplyController implements Initializable {
             String SuplayerName = txtCompanyName.getText();
             String SuplayerAddress = txtAddress.getText();
             String SuplayerPhone = txtPhoneNo.getText();
-            String SuplayerEmail = txtEmail.getText();
-            SuplayDTO suplayDTO = new SuplayDTO(SuplayerID, SuplayerName, SuplayerAddress, SuplayerPhone, SuplayerEmail);
+            String SuplayerContact = txtContact.getText();
+            SuplayDTO suplayDTO = new SuplayDTO(SuplayerID, SuplayerName, SuplayerAddress, SuplayerPhone, SuplayerContact);
             boolean updateCustomer = suplayBO.updateSuplay(suplayDTO);
             String tilte;
             String message;
@@ -191,7 +185,7 @@ public class AddSuplyController implements Initializable {
         SuplayDTO c = tblSup.getSelectionModel().getSelectedItem();
         txtSupId.setText(c.getSuplayerID());
         txtAddress.setText(c.getSuplayerAddress());
-        txtEmail.setText(c.getSuplayerEmail());
+        txtContact.setText(c.getSuplayerContact());
         txtCompanyName.setText(c.getSuplayerName());
         txtPhoneNo.setText(c.getSuplayerPhone());
 

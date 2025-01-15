@@ -15,7 +15,7 @@ public class SuplayBOImpl implements SuplayBO {
 
     @Override
     public boolean addSuplay(SuplayDTO suplay) throws ClassNotFoundException, SQLException {
-        return suplayDAO.add(new Suplay(suplay.getSuplayerID(),suplay.getSuplayerName(),suplay.getSuplayerAddress(),suplay.getSuplayerPhone(),suplay.getSuplayerEmail()));
+        return suplayDAO.add(new Suplay(suplay.getSuplayerID(),suplay.getSuplayerName(),suplay.getSuplayerAddress(),suplay.getSuplayerPhone(),suplay.getSuplayerContact()));
 
     }
 
@@ -26,13 +26,13 @@ public class SuplayBOImpl implements SuplayBO {
 
     @Override
     public boolean updateSuplay(SuplayDTO suplay) throws ClassNotFoundException, SQLException {
-        return suplayDAO.update(new Suplay(suplay.getSuplayerID(),suplay.getSuplayerName(),suplay.getSuplayerAddress(),suplay.getSuplayerPhone(),suplay.getSuplayerEmail()));
+        return suplayDAO.update(new Suplay(suplay.getSuplayerID(),suplay.getSuplayerName(),suplay.getSuplayerAddress(),suplay.getSuplayerPhone(),suplay.getSuplayerContact()));
     }
 
     @Override
     public SuplayDTO searchSuplay(String id) throws ClassNotFoundException, SQLException {
         Suplay search = suplayDAO.search(id);
-        return new SuplayDTO(search.getSuplayerID(),search.getSuplayerName(),search.getSuplayerAddress(),search.getSuplayerPhone(),search.getSuplayerEmail());
+        return new SuplayDTO(search.getSuplayerID(),search.getSuplayerName(),search.getSuplayerAddress(),search.getSuplayerPhone(),search.getSuplayerContact());
     }
 
     @Override
@@ -40,7 +40,7 @@ public class SuplayBOImpl implements SuplayBO {
         ObservableList<Suplay> all =suplayDAO.getAll();
         ObservableList<SuplayDTO> allSuplay = FXCollections.observableArrayList();
         for (Suplay ID : all) {
-            SuplayDTO dto = new SuplayDTO(ID.getSuplayerID(),ID.getSuplayerName(),ID.getSuplayerAddress(),ID.getSuplayerPhone(),ID.getSuplayerEmail());
+            SuplayDTO dto = new SuplayDTO(ID.getSuplayerID(),ID.getSuplayerName(),ID.getSuplayerAddress(),ID.getSuplayerPhone(),ID.getSuplayerContact());
             allSuplay.add(dto);
         }
         return allSuplay;

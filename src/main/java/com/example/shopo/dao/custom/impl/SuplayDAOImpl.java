@@ -12,25 +12,25 @@ import java.sql.SQLException;
 public class SuplayDAOImpl implements SuplayDAO {
     @Override
     public boolean add(Suplay ID) throws ClassNotFoundException, SQLException {
-        String sql = "insert into suplay values(?,?,?,?,?)";
-        return CrudUtil.executeUpdate(sql, ID.getSuplayerID(),ID.getSuplayerName(),ID.getSuplayerAddress(),ID.getSuplayerPhone(),ID.getSuplayerEmail());
+        String sql = "insert into suppliers values(?,?,?,?,?)";
+        return CrudUtil.executeUpdate(sql, ID.getSuplayerID(),ID.getSuplayerName(),ID.getSuplayerAddress(),ID.getSuplayerPhone(), ID.getSuplayerContact());
     }
 
     @Override
     public boolean delete(String ID) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM suplay WHERE suplayerID= ?";
+        String sql = "DELETE FROM suppliers WHERE supplier_id= ?";
         return CrudUtil.executeUpdate(sql, ID);
     }
 
     @Override
     public boolean update(Suplay ID) throws ClassNotFoundException, SQLException {
-        String sql = "update suplay set suplayerName =?,suplayerAddress=?,suplayerPhone=?,suplayerEmail=? where suplayerID=?";
-        return CrudUtil.executeUpdate(sql, ID.getSuplayerName(), ID.getSuplayerAddress(), ID.getSuplayerPhone(), ID.getSuplayerEmail(),ID.getSuplayerID());
+        String sql = "update suppliers set name =?,address=?,phone=?,contact_name=? where supplier_id=?";
+        return CrudUtil.executeUpdate(sql, ID.getSuplayerName(), ID.getSuplayerAddress(), ID.getSuplayerPhone(), ID.getSuplayerContact(),ID.getSuplayerID());
     }
 
     @Override
     public Suplay search(String ID) throws ClassNotFoundException, SQLException {
-        String sql = "select * from Suplay where suplayerID=?";
+        String sql = "select * from suppliers where supplier_id=?";
         ResultSet rst = CrudUtil.executeQuery(sql, ID);
         if (rst.next()) {
             return new Suplay(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5));
@@ -40,7 +40,7 @@ public class SuplayDAOImpl implements SuplayDAO {
 
     @Override
     public ObservableList<Suplay> getAll() throws ClassNotFoundException, SQLException {
-        String sql = "select * from Suplay";
+        String sql = "select * from suppliers";
         ResultSet rst = CrudUtil.executeQuery(sql);
         ObservableList<Suplay> allSuplay = FXCollections.observableArrayList();
         while (rst.next()) {
@@ -56,7 +56,7 @@ public class SuplayDAOImpl implements SuplayDAO {
 
     @Override
     public int getRowCount() throws ClassNotFoundException, SQLException {
-        String SQL = "SELECT COUNT(suplayerID) FROM Suplay";
+        String SQL = "SELECT COUNT(supplier_id) FROM suppliers";
         ResultSet rst = CrudUtil.executeQuery(SQL, new Object[0]);
         return rst.next() ? rst.getInt(1) : -1;
     }
